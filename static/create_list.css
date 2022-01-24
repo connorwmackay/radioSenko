@@ -1,0 +1,23 @@
+#appTitle {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 2.5em;
+}
+
+#createListForm {
+    width: 15em;
+    margin: auto;
+}
+
+#createListForm input {
+    width: 100%;
+}
+
+#createListForm li {
+    width: 100%;
+}
+
+#createListForm button {
+    width: 50%;
+    margin: auto;
+}

@@ -1,0 +1,25 @@
+#appTitle {
+    text-align: center;
+    margin-top: 1em;
+}
+
+nav {
+    width: 15em;
+    margin: auto;
+    margin-bottom: 2.5em;
+}
+
+#radioContainer {
+    width: 30em;
+    margin: auto;
+}
+
+#radioTrackTitle {
+    text-align: center;
+    white-space: nowrap;
+    padding-bottom: 1em;
+}
+
+#radioTrackAudio {
+    width: 100%;
+}
