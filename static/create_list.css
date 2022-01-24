@@ -1,23 +1,28 @@
 #appTitle {
     text-align: center;
     margin-top: 1em;
+}
+
+nav {
+    width: 15em;
+    margin: auto;
     margin-bottom: 2.5em;
 }
 
-#createListForm {
+#animeContainer {
     width: 15em;
     margin: auto;
 }
 
-#createListForm input {
-    width: 100%;
+#animeNameInput {
+    width: 75%;
 }
 
-#createListForm li {
-    width: 100%;
+#addAnimeBtn {
+    width: 20%;
 }
 
-#createListForm button {
-    width: 50%;
+#submitListBtn {
+    width: 5em;
     margin: auto;
 }

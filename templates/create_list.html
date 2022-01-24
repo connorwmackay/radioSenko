@@ -6,17 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/create_list.css">
     <title>Radio Senko</title>
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1 id="appTitle">Radio Senko</h1>
+    <header>
+        <h1 id="appTitle">Radio Senko</h1>
 
-    <form action="/create-list" method="post" id="createListForm">
-        <input type="text" name="animeName" placeholder="Enter an anime name and press enter...">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/create-list">Create List</a>
+        </nav>
+    </header>
+
+    <div id="animeContainer">
+        <h2>Create Anime List</h2>
+        <input type="text" name="animeName" id="animeNameInput" placeholder="Enter an anime name..." autocomplete="off">
+        <button type="button" id="addAnimeBtn">Add</button>
+
         <ul id="addedAnimeList">
 
         </ul>
-        <button type="submit">Create</button>
-    </form>
+        
+        <button id="submitListBtn">Create</button>
+    </div>
     
+    <script src="/static/create_list.js"></script>
 </body>
 </html>
