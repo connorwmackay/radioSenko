@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.jinja' %}
+{% block title %}Create List{% endblock %}
+{% block head %}
+    {{ super() }}
     <link rel="stylesheet" href="/static/create_list.css">
-    <title>Radio Senko</title>
-
     <script
     src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"></script>
-</head>
-<body>
-    <header>
-        <h1 id="appTitle">Radio Senko</h1>
-
-        <nav>
-            <a href="/">Home</a>
-            <a href="/create-list">Create List</a>
-        </nav>
-    </header>
-
+{% endblock %}
+{% block mainContent %}
     <div id="animeContainer">
         <h2>Create Anime List</h2>
         <input type="text" name="animeName" id="animeNameInput" placeholder="Enter an anime name..." autocomplete="off">
@@ -35,5 +22,4 @@
     </div>
     
     <script src="/static/create_list.js"></script>
-</body>
-</html>
+{% endblock %}

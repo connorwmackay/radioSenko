@@ -1,0 +1,14 @@
+#radioContainer {
+    width: 30em;
+    margin: auto;
+}
+
+#radioTrackTitle {
+    text-align: center;
+    white-space: nowrap;
+    padding-bottom: 1em;
+}
+
+#radioTrackAudio {
+    width: 100%;
+}

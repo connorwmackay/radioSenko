@@ -9,4 +9,4 @@ app.register_blueprint(routes)
 @app.route("/")
 def index():
     url_for('static', filename='style.css')
-    return render_template('index.html', track_src='#', track_title='Track Title')
+    return render_template('index.jinja', track_src='#', track_title='Track Title')

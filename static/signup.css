@@ -1,0 +1,9 @@
+#signupForm {
+    width: 30em;
+    margin: auto;
+}
+
+#signupForm input {
+    width: 100%;
+    margin-bottom: 0.5em;
+}

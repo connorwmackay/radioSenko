@@ -1,0 +1,18 @@
+{% extends 'base.jinja' %}
+{% block title %}Login{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/login.css">
+{% endblock %}
+{% block mainContent %}
+    <form action="/login" id="loginForm" autocomplete="off">
+        <h2>Login</h2>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="usernameInput" placeholder="Example">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="passwordInput" placeholder="Password 1!">
+
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}

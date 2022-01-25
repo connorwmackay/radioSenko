@@ -1,0 +1,12 @@
+{% extends 'base.jinja' %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/home.css">
+{% endblock %}
+{% block mainContent %}
+    <div id="radioContainer">
+        <h2 id="radioTrackTitle">{{ track_title }}</h2>
+        <audio id="radioTrackAudio" src={{ track_src }} controls></audio>
+    </div>
+{% endblock %}
