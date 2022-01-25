@@ -1,5 +1,6 @@
 $(() => {
     const animeNameInput = $("#animeNameInput");
+    const listNameInput = $("#listNameInput");
     const addAnimeButton = $("#addAnimeBtn");
     const submitListButton = $("#submitListBtn");
     const addedAnimeList = $("#addedAnimeList");
@@ -17,6 +18,6 @@ $(() => {
     });
 
     submitListButton.click(() => {
-        $.post("/create-list", {'animeList[]': animeList});
+        $.post("/create-list", {'listName': listNameInput.val() || 'My List', 'animeList[]': animeList});
     });
 });

@@ -14,6 +14,11 @@ nav {
     margin: auto;
 }
 
+#listNameInput {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
 #animeNameInput {
     width: 75%;
 }
