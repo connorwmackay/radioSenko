@@ -1,4 +1,3 @@
-let is_next_track_downloaded = false;
 let is_playing = false;
 let random_index = 0;
 let audio;
@@ -15,14 +14,6 @@ $(() => {
 
             playTrack(list_items, isOp, random_index)
             requestNextTrack();
-
-            audio.addEventListener('ended', () => {
-                console.log("ended...")
-                is_next_track_downloaded = false;
-                playTrack(list_items, isOp, random_index)
-                requestNextTrack();
-            }, false);
-
         } else {
             $("#radioPlayBtn").text("Play")
             audio.pause()
@@ -73,6 +64,13 @@ function playTrack(list, is_op, index) {
 
     is_next_track_downloaded = false;
     audio = new Audio(`/static/downloads/${list[index]}${op}.mp4`);
+
+    audio.addEventListener('ended', () => {
+        console.log("ended...")
+        playTrack(list_items, isOp, random_index)
+        requestNextTrack();
+    }, false);
+
     const trackName = $("#radioTrackName");
     trackName.text(list[index] + op);
     audio.play();
