@@ -2,7 +2,8 @@ from urllib import request
 from flask import Blueprint, render_template, url_for, request, session, redirect
 import bcrypt
 import base64
-from db import newUser, User
+from db import newUser, User, new_list, List, new_list_item, ListItem
+import uuid
 
 routes = Blueprint('routes', __name__)
 
@@ -24,15 +25,22 @@ def create_list():
     url_for('static', filename='create_list.css')
     url_for('static', filename='create_list.js')
 
-    if request.method == 'POST':
-        list_name = request.form["listName"]
-        anime_list = request.form.getlist('animeList[]')
-        print("List: {}".format(list_name))
-        print(anime_list)
-
     username = None
     if 'username' in session:
         username = session['username']
+
+    if request.method == 'POST':
+        list_name = request.form["listName"]
+        anime_list = request.form.getlist('animeList[]')
+        user = User.query.filter_by(username=username).first()
+        if user:
+            random_uuid = uuid.uuid4()
+            new_list(List(list_name, random_uuid, user.id))
+
+            for anime in anime_list:
+                list_inst = List.query.filter_by(
+                    uuid=random_uuid).first()
+                new_list_item(ListItem(anime, list_inst.id))
 
     return render_template('create_list.jinja', username=username)
 
