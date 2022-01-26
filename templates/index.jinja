@@ -7,6 +7,26 @@
 {% block mainContent %}
     <div id="radioContainer">
         <h2 id="radioTrackTitle">{{ track_title }}</h2>
-        <audio id="radioTrackAudio" src={{ track_src }} controls></audio>
+        
+        <form method='GET' action="/">
+            <button type="submit">Use</button>
+            <select name="list" id="radioListSelect">
+            <option value="none" class="radioListOption">None</option>
+            {% for list_name_item in list_names %}
+                <option value={{list_name_item["uuid"]}} class="radioListOption">{{list_name_item["name"]}}</option>
+            {% endfor %}
+            </select>
+            <label for="radioList" id="radioListSelectLabel">Choose List </label>
+        </form>
+        <div id="trackContainer">
+            <h2 id="radioTrackName">No Track Playing</h2>
+            <button class="trackBtn" id="radioPlayBtn">Play</button>
+            <button class="trackBtn" id="radioSkipBtn">Skip</button>
+        </div>
+        
     </div>
+    <script type="text/javascript">
+            const list_items = {{ list_items }} || [];
+    </script>
+    <script src="/static/radio.js"></script>
 {% endblock %}

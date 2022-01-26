@@ -6,9 +6,40 @@
 #radioTrackTitle {
     text-align: center;
     white-space: nowrap;
-    padding-bottom: 1em;
+    padding-bottom: 0.5em;
 }
 
 #radioTrackAudio {
     width: 100%;
+}
+
+#radioListSelectLabel {
+    display: flex;
+    float: right;
+    margin-right: 0.5em;
+}
+
+#radioListSelect {
+    margin-bottom: 1em;
+    display: flex;
+    float: right;
+    width: 7rem;
+    height: 2em;
+}
+
+.radioListOption {
+    width: 50%;
+    margin: auto;
+}
+
+.trackBtn {
+    width: 45%;
+    margin: auto;
+}
+
+#trackContainer {
+    width: 7em;
+    text-overflow: clip;
+    text-align: center;
+    margin: auto;
 }

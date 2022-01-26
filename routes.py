@@ -1,9 +1,13 @@
 from urllib import request
-from flask import Blueprint, render_template, url_for, request, session, redirect
+from flask import Blueprint, render_template, url_for, request, session, redirect, jsonify
 import bcrypt
 import base64
 from db import newUser, User, new_list, List, new_list_item, ListItem
 import uuid
+import pytube
+import glob
+import ffmpeg
+import os
 
 routes = Blueprint('routes', __name__)
 
@@ -16,7 +20,24 @@ def index():
     if 'username' in session:
         username = session['username']
 
-    return render_template('index.jinja', username=username, track_src='#', track_title='Track Title')
+        user = User.query.filter_by(username=username).first()
+        lists = List.query.filter_by(user_id=user.id)
+        list_names = []
+
+        for list in lists:
+            list_names.append({"uuid": list.uuid, "name": list.name})
+
+    list_items = []
+    list_query = request.args.get("list")
+    if list_query:
+        if list_query != "none":
+            list_db = List.query.filter_by(
+                uuid=list_query, user_id=user.id).first()
+            list_items_db = ListItem.query.filter_by(list_id=list_db.id)
+            for item in list_items_db:
+                list_items.append(item.name)
+
+    return render_template('index.jinja', username=username, list_names=list_names, list_items=list_items)
 
 
 @routes.route('/create-list', methods=('GET', 'POST'))
@@ -102,3 +123,17 @@ def signup():
 def logout():
     session.pop('username', None)
     return redirect(url_for('routes.index'))
+
+
+@routes.route('/radio/request/<track_name>/<op>')
+def radio_request(track_name, op):
+    yt_video = pytube.Search(track_name + op).results[0]
+    target_stream = yt_video.streams.get_audio_only()
+    file_name = "static/downloads/{}.mp4".format(track_name + op)
+
+    if not os.path.isfile(file_name):
+        target_stream.download(
+            output_path="", filename=file_name, max_retries=1)
+        return jsonify({})
+    else:
+        return jsonify({})

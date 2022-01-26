@@ -10,9 +10,10 @@ load_dotenv('.env')
 
 
 def create_app(test_config=None):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@127.0.0.1:3306/{}'.format(
         os.getenv('DB_USER'), os.getenv('DB_PASS'), os.getenv('DB_NAME'))
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.secret_key = os.getenv('SECRET_KEY')
     app.register_blueprint(routes)
     db.init_app(app)
