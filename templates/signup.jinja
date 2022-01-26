@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/static/signup.css">
 {% endblock %}
 {% block mainContent %}
-    <form action="/signup" id="signupForm" autocomplete="off">
+    <form action="/signup" method="POST" id="signupForm" autocomplete="off">
         <h2>Signup</h2>
         <label for="username">Username</label>
         <input type="text" name="username" id="usernameInput" placeholder="Example">

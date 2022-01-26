@@ -3,7 +3,7 @@ from routes import routes
 from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
-from db import db
+from db import db, User
 
 load_dotenv('.env')
 
@@ -14,4 +14,7 @@ def create_app(test_config=None):
         os.getenv('DB_USER'), os.getenv('DB_PASS'), os.getenv('DB_NAME'))
     app.register_blueprint(routes)
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
+
     return app
