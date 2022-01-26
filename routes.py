@@ -1,5 +1,5 @@
 from urllib import request
-from flask import Blueprint, render_template, url_for, request
+from flask import Blueprint, render_template, url_for, request, session, redirect
 import bcrypt
 import base64
 from db import newUser, User
@@ -10,7 +10,12 @@ routes = Blueprint('routes', __name__)
 @routes.route("/")
 def index():
     url_for('static', filename='style.css')
-    return render_template('index.jinja', track_src='#', track_title='Track Title')
+
+    username = None
+    if 'username' in session:
+        username = session['username']
+
+    return render_template('index.jinja', username=username, track_src='#', track_title='Track Title')
 
 
 @routes.route('/create-list', methods=('GET', 'POST'))
@@ -25,7 +30,11 @@ def create_list():
         print("List: {}".format(list_name))
         print(anime_list)
 
-    return render_template('create_list.jinja')
+    username = None
+    if 'username' in session:
+        username = session['username']
+
+    return render_template('create_list.jinja', username=username)
 
 
 @routes.route('/login', methods=('GET', 'POST'))
@@ -47,7 +56,11 @@ def login():
         if user:
             password_check = bcrypt.checkpw(password.encode(
                 'utf-8'), bytes.fromhex(user.passwordHash))
-            print("Password Check:", password_check)
+            session['username'] = username
+            return redirect(url_for('routes.index'))
+
+    if 'username' in session:
+        username = session['username']
 
     return render_template('login.jinja', is_logged_in=password_check, username=username, is_login_done=is_login_done)
 
@@ -70,4 +83,14 @@ def signup():
 
         newUser(User(username, email, hashedPassword.hex()))
 
-    return render_template('signup.jinja')
+    username = None
+    if 'username' in session:
+        username = session['username']
+
+    return render_template('signup.jinja', username=username)
+
+
+@routes.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('routes.index'))

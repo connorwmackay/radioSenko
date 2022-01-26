@@ -7,4 +7,5 @@ nav {
     width: 15em;
     margin: auto;
     margin-bottom: 2.5em;
+    text-transform: capitalize;
 }

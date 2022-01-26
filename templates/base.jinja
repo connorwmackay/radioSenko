@@ -13,12 +13,21 @@
     <header>
         <h1 id="appTitle">Radio Senko</h1>
 
-        <nav>
+        {% if username %}
+            <nav>
+                <a href="/">Home</a>
+                <a href="/create-list">Create List</a>
+                <a href={{ "/user/{}".format(username) }}>{{ username }}</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        {% else %}
+            <nav>
             <a href="/">Home</a>
             <a href="/create-list">Create List</a>
             <a href="/login">Login</a>
             <a href="/signup">Signup</a>
         </nav>
+        {% endif %}
     </header>
 
     <div id="mainContent">

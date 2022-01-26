@@ -12,7 +12,7 @@ class User(db.Model):
         self.passwordHash = passwordHash
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(128), nullable=False)
+    username = db.Column(db.String(128), unique=True, nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
     passwordHash = db.Column(db.String(128), nullable=False)
 
