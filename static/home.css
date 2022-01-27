@@ -35,20 +35,36 @@
 .trackBtn {
     width: 45%;
     background-color: transparent;
+    margin-right: 1em;
     border: none;
     color: white;
-    margin: auto;
+    align-self: flex-end;
 }
 
 #trackContainer {
+    display: flex;
+    flex-direction: column;
     border: 0.25em solid rgb(95, 32, 95);
     width: 10em;
+    height: 10em;
     padding: 1em;
     background-color: rgb(148, 51, 148);
     color: white;
     border-radius: 1em;
-    text-overflow: clip;
     text-align: center;
     margin: auto;
     margin-top: 1em;
+}
+
+#trackBtnContainer {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+#radioTrackName {
+    margin: auto;
+    align-self: flex-start;
 }
