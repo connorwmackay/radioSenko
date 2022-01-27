@@ -34,12 +34,21 @@
 
 .trackBtn {
     width: 45%;
+    background-color: transparent;
+    border: none;
+    color: white;
     margin: auto;
 }
 
 #trackContainer {
-    width: 7em;
+    border: 0.25em solid rgb(95, 32, 95);
+    width: 10em;
+    padding: 1em;
+    background-color: rgb(148, 51, 148);
+    color: white;
+    border-radius: 1em;
     text-overflow: clip;
     text-align: center;
     margin: auto;
+    margin-top: 1em;
 }

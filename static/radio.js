@@ -3,31 +3,38 @@ let random_index = 0;
 let audio;
 let isOp = true;
 
+const playIcon = $("<i class='fas fa-play-circle fa-3x'></i>");
+const stopIcon = $("<i class='fas fa-stop-circle fa-3x'></i>");
+
 $(() => {
-    random_index = Math.floor(Math.random() * list_items.length);
-    isOp = Math.floor(Math.random() * 3);
-    requestTrack(list_items, isOp, random_index);
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('list')) {
+        if (urlParams.get('list') != "none") {
+            random_index = Math.floor(Math.random() * list_items.length);
+            isOp = Math.floor(Math.random() * 3);
+            requestTrack(list_items, isOp, random_index);
+            $("#radioPlayBtn").click(() => {
+                if (!is_playing) {
+                    $("#radioPlayBtn").html(stopIcon);
 
-    $("#radioPlayBtn").click(() => {
-        if (!is_playing) {
-            $("#radioPlayBtn").text("Stop")
+                    playTrack(list_items, isOp, random_index);
+                    requestNextTrack();
+                } else {
+                    $("#radioPlayBtn").html(playIcon);
+                    audio.pause()
+                    is_playing = false;
+                }
+            });
 
-            playTrack(list_items, isOp, random_index)
-            requestNextTrack();
-        } else {
-            $("#radioPlayBtn").text("Play")
-            audio.pause()
-            is_playing = false;
+            $("#radioSkipBtn").click(() => {
+                if (is_playing) {
+                    audio.pause();
+                    playTrack(list_items, isOp, random_index);
+                    requestNextTrack();
+                }
+            });
         }
-    });
-
-    $("#radioSkipBtn").click(() => {
-        if (is_playing) {
-            audio.pause();
-            playTrack(list_items, isOp, random_index);
-            requestNextTrack();
-        }
-    });
+    }
 });
 
 function requestNextTrack() {

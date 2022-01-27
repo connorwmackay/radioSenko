@@ -15,6 +15,7 @@ routes = Blueprint('routes', __name__)
 @routes.route("/")
 def index():
     url_for('static', filename='style.css')
+    list_names = []
 
     username = None
     if 'username' in session:
@@ -22,7 +23,6 @@ def index():
 
         user = User.query.filter_by(username=username).first()
         lists = List.query.filter_by(user_id=user.id)
-        list_names = []
 
         for list in lists:
             list_names.append({"uuid": list.uuid, "name": list.name})
@@ -85,11 +85,15 @@ def login():
         if user:
             password_check = bcrypt.checkpw(password.encode(
                 'utf-8'), bytes.fromhex(user.passwordHash))
-            session['username'] = username
-            return redirect(url_for('routes.index'))
+            if password_check:
+                password_check = True
+                session['username'] = username
+                return redirect(url_for('routes.index'))
 
     if 'username' in session:
         username = session['username']
+    else:
+        username = None
 
     return render_template('login.jinja', is_logged_in=password_check, username=username, is_login_done=is_login_done)
 
