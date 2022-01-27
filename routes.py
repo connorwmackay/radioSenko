@@ -141,3 +141,10 @@ def radio_request(track_name, op):
         return jsonify({})
     else:
         return jsonify({})
+
+
+@routes.route('/radio/check/<track_name>/<op>')
+def radio_check(track_name, op):
+    return jsonify({
+        "is_downloaded": os.path.isfile("static/downloads/{}.mp4".format(track_name + op))
+    })
